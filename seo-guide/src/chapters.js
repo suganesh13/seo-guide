@@ -1188,3 +1188,234 @@ export const glossary = [
   { term: "SSR", full: "Server-Side Rendering", desc: "Rendering HTML on the server per request. Good SEO performance for dynamic content.", ch: 11 },
   { term: "ICE", full: "Impact, Confidence, Ease", desc: "Prioritization scoring framework. Multiply all three scores to rank SEO initiatives.", ch: 12 },
 ];
+
+// Patch googleInsight into relevant sections
+const googleInsights = {
+  "1-0": {
+    summary: "Google confirms: core SEO remains the foundation for AI search visibility.",
+    points: [
+      "Google's AI Overviews use RAG (Retrieval-Augmented Generation) — they retrieve pages from the Search index using the same core ranking systems as traditional SEO. If you rank well organically, you're eligible for AI Overview citation.",
+      "Google uses 'query fan-out' — a single user query is expanded into multiple sub-queries to fetch comprehensive results. Pages that cover a topic broadly satisfy more fan-out sub-queries and get cited more often.",
+      "AEO and GEO are not separate from SEO in Google's view. Optimizing for generative AI search IS SEO — the same quality signals apply.",
+      "You do NOT need to create llms.txt files, special AI markup, or rewrite content in a specific format for Google's AI systems. These are myths. Focus on foundational SEO."
+    ]
+  },
+  "3-2": {
+    summary: "Google's official technical requirements for generative AI visibility.",
+    points: [
+      "To appear in AI Overviews, a page must first be indexed and eligible to appear in Google Search with a snippet. AI features cannot surface pages that aren't in the Search index.",
+      "Crawlability is essential — Google's generative AI models use publicly crawlable content to learn patterns and ground responses. Content blocked from crawling cannot appear in AI features.",
+      "JavaScript SEO best practices remain critical. Google can process JS-rendered content, but working with JS frameworks is more complex than standard HTML. Follow Google's JavaScript SEO guidelines.",
+      "Duplicate content wastes crawl resources and creates bad user experiences. Reducing duplication frees crawl budget for pages that actually matter."
+    ]
+  },
+  "4-1": {
+    summary: "Google defines what 'non-commodity content' means for AI-era SEO.",
+    points: [
+      "Google explicitly distinguishes 'commodity content' (e.g., '7 Tips for First-Time Homebuyers' — common knowledge anyone could write) from 'non-commodity content' (e.g., 'Why We Waived the Inspection & Saved Money' — unique expert experience). AI Overview citations heavily favor non-commodity content.",
+      "A unique point of view matters more now than ever. First-hand reviews, original experiences, and expert perspectives stand out to AI systems that review a variety of sources.",
+      "Do not create separate pages targeting every variation of how people might search (fan-out query targeting). Google's spam policies flag this as 'scaled content abuse' and it's ineffective — AI systems understand synonyms and general meaning.",
+      "AI-generated content is acceptable IF it meets Search Essentials quality standards. The origin of content doesn't matter; the quality and helpfulness does."
+    ]
+  },
+  "7-1": {
+    summary: "Google's official guidance on what NOT to do for AI Overview optimization.",
+    points: [
+      "You do NOT need to 'chunk' content into tiny pieces for AI systems. Google can understand multiple topics on one page and shows the relevant portion to users. Page length should be driven by your audience's needs, not AI parsing concerns.",
+      "Structured data is NOT required for AI Overviews, and there is no special schema.org markup that improves AI visibility. Continue using structured data for rich results, but don't expect it to directly influence AI citations.",
+      "Seeking inauthentic brand mentions is as harmful for AI features as it is for traditional SEO. Google's ranking systems that detect spam also feed into AI features.",
+      "You do NOT need to rewrite content specifically for AI systems. AI can understand synonyms and general meaning — you don't need every long-tail keyword variation covered explicitly."
+    ]
+  },
+  "2-0": {
+    summary: "Google's query fan-out behavior shapes what content gets cited in AI Overviews.",
+    points: [
+      "Query fan-out means Google generates multiple related sub-queries from a single user query. For 'how to fix a lawn full of weeds', fan-out queries include 'best herbicides for lawns', 'remove weeds without chemicals', and 'how to prevent weeds in lawn'.",
+      "Pages that comprehensively satisfy multiple fan-out sub-queries are more likely to be cited in AI Overviews. Map your content against all the secondary intents a user might have.",
+      "Covering every subtopic, alternative, tool, and related question makes a page more 'answer-complete'. Use H2/H3 structure to map each fan-out branch explicitly.",
+      "Don't create separate thin pages for every fan-out query variant — this violates Google's scaled content abuse policy. Instead, cover them comprehensively on fewer, deeper pages."
+    ]
+  }
+};
+
+// Apply patches to chapters array
+chapters.forEach(ch => {
+  ch.sections.forEach((sec, si) => {
+    const key = `${ch.id}-${si}`;
+    if (googleInsights[key]) {
+      sec.googleInsight = googleInsights[key];
+    }
+  });
+});
+
+// Add new chapter 13: Content Creation for AI Search
+chapters.push({
+  id: 13,
+  title: "Content Creation for AI Search",
+  tag: "AEO",
+  accent: "#0369a1",
+  icon: "✎",
+  sections: [
+    {
+      heading: "Query Fan-Out Content Strategy",
+      content: `Query fan-out is one of the most important concepts for AI-era content creation. When a user types a query, Google's AI doesn't just search for that exact phrase — it expands the query into multiple related sub-queries and evaluates whether a page can comprehensively satisfy all of them.
+
+HOW QUERY FAN-OUT WORKS:
+User query: "how to start a podcast"
+Fan-out sub-queries Google generates:
+• "best podcast recording equipment for beginners"
+• "how to edit podcast audio"
+• "where to host a podcast for free"
+• "how to get first podcast listeners"
+• "podcast RSS feed setup"
+• "how to submit podcast to Spotify"
+
+A page that addresses only the main query gets cited for one sub-query. A page that covers all of them gets cited across many AI responses.
+
+BUILDING FAN-OUT COMPLETE CONTENT:
+1. Identify your primary user intent
+2. List every secondary intent a user implicitly also needs answered
+3. Map sub-questions: What? Why? How? When? Who? Which alternatives? What tools? What problems arise? What does success look like?
+4. Structure each sub-question as a clear H2 or H3 section
+5. Verify completeness: would a user who reads this page need to search anything else on this topic?
+
+The goal is content that fully satisfies the user's information need — leaving no outstanding questions that would send them back to Google.`,
+      googleInsight: {
+        summary: "Google's AI uses fan-out queries to evaluate page comprehensiveness.",
+        points: [
+          "Query fan-out generates concurrent, related sub-queries from the original user query. Pages satisfying more sub-queries get more AI citation opportunities.",
+          "Focus on covering the topic comprehensively rather than targeting every keyword variant separately. Google's systems understand semantic meaning — comprehensive depth matters more than keyword breadth.",
+          "Do NOT create separate pages targeting individual fan-out queries — that's scaled content abuse. Cover them on one comprehensive page."
+        ]
+      },
+      tips: [
+        "Use the 'Also Asked' tool (alsoasked.com) to map the full fan-out question tree for any topic. It visually shows you all the related questions users ask.",
+        "Test your page's fan-out completeness by asking ChatGPT or Claude: 'What questions would someone still have after reading this article?' The gaps are your fan-out holes.",
+        "A good proxy for fan-out completeness: if a user could read your page and have a full conversation with an expert about the topic without needing to look anything else up, you've covered the fan-out.",
+        "Otterly.ai's fan-out tool (otterly.ai/geo/query-fan-out/) shows you specifically which fan-out sub-queries your page isn't satisfying — extremely useful for content gap analysis.",
+        "The 'People Also Ask' box in Google SERPs IS Google showing you the fan-out queries for a topic. Mine it systematically for every article you write."
+      ],
+      caseStudy: {
+        company: "Semrush Blog",
+        result: "Fan-out strategy drove 300% increase in AI Overview citations",
+        story: "Semrush restructured their existing keyword research guide by mapping every fan-out sub-query the topic generated. The original article answered the main question ('how to do keyword research') but missed secondary intents: how to do it for free, how to do it for a new website, how long it takes, what tools are best for beginners vs. enterprises, and how to prioritize the results. After adding comprehensive sections for each fan-out sub-query, the page began appearing in AI Overviews for dozens of related queries, not just the primary one. Their AI Overview citation rate for that URL increased roughly 3x. The total additional organic traffic from this single content expansion was significant, with no new page creation needed."
+      }
+    },
+    {
+      heading: "Non-Commodity Content Creation",
+      content: `The most important content insight from Google's 2025–2026 guidance: the distinction between commodity and non-commodity content.
+
+COMMODITY CONTENT (what to avoid):
+"7 Tips for First-Time Homebuyers" — common knowledge that could come from anyone
+"Best Practices for Email Marketing" — restates what's widely known
+"What is Machine Learning?" — a definition anyone could write
+
+These articles have no unique value. An AI system can synthesize them from thousands of sources. They're easily replaceable and increasingly ignored.
+
+NON-COMMODITY CONTENT (what to create):
+"Why We Waived the Inspection & Saved Money: A Look Inside the Sewer Line" — specific, first-hand experience
+"What 3 Months of A/B Testing Our Email Subject Lines Taught Us" — original data from actual work
+"I Interviewed 50 ML Engineers. Here's What They Actually Use" — unique primary research
+
+NON-COMMODITY CONTENT FORMATS:
+• First-hand experience reports ("I tested X for 6 months")
+• Original research and surveys with unique data
+• Expert interviews with unpublished insights
+• Case studies with specific, verifiable results
+• Contrarian takes backed by evidence
+• Detailed how-to with real screenshots and actual workflows
+• Failure analyses ("what went wrong and why")
+
+THE AI SYSTEM TEST:
+Before publishing, ask: "Could an AI model generate this article from its training data?" If yes, it's commodity content. If the answer is "no, this requires specific human experience or proprietary data", you have non-commodity content worth creating.`,
+      tips: [
+        "The easiest path to non-commodity content: document what you actually did. Real workflows, real screenshots, real results. Nobody else has that exact experience.",
+        "Survey your customers or audience. Even 50 responses to a specific question generates original data nobody else has. 'We surveyed 50 customers and found...' is non-commodity by definition.",
+        "Avoid AI writing patterns flagged by Google's systems: 'in today's fast-paced world', 'it's important to note', 'in this comprehensive guide'. These signal commodity AI content.",
+        "The headline test for non-commodity content: if the headline could apply to an article on any competitor's site, it's probably commodity. Specific, experience-based headlines signal unique content.",
+        "Failure content is underrated. 'What I Tried, Why It Failed, and What I Did Instead' is inherently non-commodity — it requires real experience and produces genuine learning."
+      ],
+      caseStudy: {
+        company: "Animalz (content agency)",
+        result: "Non-commodity strategy tripled client organic traffic with fewer articles",
+        story: "Animalz noticed their clients who published 2-3 deeply researched, original articles per month consistently outperformed clients publishing 20+ commodity articles per month. They formalized this as their 'ROT' (Return on Time) framework: each piece of content had to have something no other piece on the internet had — original data, unique expert insight, or first-hand documented experience. For one SaaS client, they replaced a content factory approach (30 articles/month) with a research-first approach (4-6 articles/month, each with original survey data or documented customer case studies). Within 6 months, organic traffic to the new articles was higher than the entire previous content library. Post-2024 helpful content updates rewarded this approach disproportionately."
+      }
+    },
+    {
+      heading: "Answer-First Content Structure",
+      content: `Answer-first content structure is the content formatting framework that maximizes both AI citation probability and human readability simultaneously.
+
+THE CORE PRINCIPLE:
+Lead with the answer, then provide the evidence, context, and detail. This mirrors how a confident expert answers a question — they state the answer directly, then explain why.
+
+THE ANSWER-FIRST TEMPLATE:
+
+H2: [Question the user is asking]
+[Direct 2-3 sentence answer — the TL;DR a user could screenshot and share]
+[Supporting context — the why and how behind the answer]
+[Evidence, data, examples that prove the answer]
+[Edge cases, exceptions, nuances]
+[Related next question or link to deeper content]
+
+STRUCTURAL ELEMENTS FOR AI CITATION:
+• Key Takeaways box at top — 3-6 bullets summarizing the article's core insights (visually separated)
+• Direct definitions: "X is [definition]" — never delay definitions with background context
+• Numbered consolidated list at top with jump links for listicle articles
+• Callout boxes for critical warnings, tips, or definitions
+• Mini-tables for comparisons (HTML tables parsed accurately by AI)
+• Example boxes showing real application of concepts
+• Self-contained sections — each section answers its heading fully, without references to "as mentioned above" or "in the next section"
+
+HUMANIZED HEADERS:
+• Weak: "KPI Metrics" → Strong: "How to Measure KPI Metrics That Actually Matter"
+• Weak: "Create Dashboard" → Strong: "Build a Dashboard in 5 Steps (With Screenshots)"
+• Weak: "Email Marketing Benefits" → Strong: "Why Email Marketing Outperforms Social for B2B (Data)"
+
+The header should tell the reader exactly what they'll get, in their own language.`,
+      googleInsight: {
+        summary: "Google recommends organizing content for human readers, which also aids AI parsing.",
+        points: [
+          "Write content for your human audience, using paragraphs, sections, and headings that provide clear structure. This organization aids both human navigation and AI comprehension.",
+          "There is no specific way to write 'for AI systems' — AI can understand synonyms and general meaning. Write naturally, comprehensively, and clearly.",
+          "Avoid creating content blocks specifically to be 'chunked' by AI. Write self-contained sections because they're better for human readers — that naturally also aids AI extraction."
+        ]
+      },
+      tips: [
+        "The 'screenshot test': if a user could screenshot the first paragraph of each section and get a complete, useful answer, your structure is working. If they need to read the whole section for context, restructure to lead with the answer.",
+        "Add a 'Key Takeaways' box immediately after your introduction. This single element improves both AI citation probability and human engagement (readers who see clear value are more likely to continue reading).",
+        "Use 'Jump to' links at the top of long articles. This signals to both humans and AI that your content has well-organized, discrete sections. It also improves user experience for mobile readers.",
+        "The 'Useful Alone' test for content chunking: can each H2 section stand alone, make sense without the rest of the article, and provide value to someone who only reads that section? If yes, your chunking is correct.",
+        "Tables are AI citation gold. If you have comparison data — tools, prices, features, approaches — put it in an HTML table. AI systems extract tables intact and cite them frequently."
+      ],
+      caseStudy: {
+        company: "Ahrefs (SEO tool)",
+        result: "Answer-first restructure improved Featured Snippet capture by 60%",
+        story: "Ahrefs ran a systematic experiment on their blog: they restructured 50 high-traffic articles from a 'narrative-first' format (introduction → background → explanation → answer) to an 'answer-first' format (direct answer → supporting detail → full explanation). The primary change was moving the definition or direct answer to the first sentence of each relevant section, replacing background context that had previously opened sections. Over 3 months, Featured Snippet capture for these pages improved by approximately 60%, and AI Overview citation rate also increased measurably. User engagement metrics also improved — time on page increased and bounce rate decreased — suggesting that answer-first structure benefits both humans and AI systems simultaneously."
+      }
+    }
+  ],
+  exercises: [
+    {
+      title: "Fan-Out Query Map",
+      difficulty: "Intermediate",
+      time: "45 min",
+      task: "Choose one article you've written or plan to write. (1) Go to alsoasked.com and enter your primary topic. Screenshot the full question tree. (2) List every fan-out sub-query the topic generates. (3) For each sub-query, check: does your current article answer it? Mark covered/missing. (4) Write a content expansion plan: which missing sub-queries would you add as new H2 sections? Prioritize by user value.",
+      goal: "Map the full fan-out landscape of a topic and identify comprehensiveness gaps."
+    },
+    {
+      title: "Commodity vs Non-Commodity Audit",
+      difficulty: "Beginner",
+      time: "30 min",
+      task: "Take 5 articles from your site (or any site). For each: (1) Ask 'Could an AI model generate this from its training data?' Answer honestly. (2) Score it: Commodity / Borderline / Non-Commodity. (3) For every Commodity article, identify one transformation — what original data, first-hand experience, or unique insight could make it non-commodity? Write a 1-sentence transformation pitch for each.",
+      goal: "Develop the ability to instantly distinguish commodity from non-commodity content."
+    },
+    {
+      title: "Answer-First Content Rewrite",
+      difficulty: "Advanced",
+      time: "90 min",
+      task: "Take one existing article. (1) Identify 3 sections that are currently 'narrative-first' (background before answer). (2) Rewrite each section in answer-first format: direct answer in first sentence, then context and evidence. (3) Add a Key Takeaways box to the top of the article (3-6 bullets). (4) Rename any vague headers to be action-oriented and specific. (5) If any comparison data exists, convert it to an HTML table. Submit the rewritten version to GSC for re-indexing.",
+      goal: "Practice the answer-first restructure that improves both AI citation and human readability."
+    }
+  ]
+});
+

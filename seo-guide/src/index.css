@@ -5,20 +5,19 @@
   --surface: #ffffff;
   --surface-2: #f7f8fc;
   --border: #e4e7f0;
-  --border-2: #d0d5e8;
-  --text-1: #0f1117;
-  --text-2: #3d4460;
-  --text-3: #7b82a0;
-  --text-4: #a8aec8;
+  --border-2: #c8cde0;
+  --text-1: #0d1117;
+  --text-2: #2d3348;
+  --text-3: #4a5168;
+  --text-4: #6b7490;
   --sidebar-bg: #ffffff;
-  --sidebar-active: #f0f2f7;
   --font-sans: 'DM Sans', system-ui, sans-serif;
   --font-display: 'DM Serif Display', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
   --radius: 10px;
   --radius-lg: 16px;
-  --shadow: 0 1px 3px rgba(15,17,35,0.06), 0 1px 2px rgba(15,17,35,0.04);
-  --shadow-md: 0 4px 12px rgba(15,17,35,0.08), 0 2px 4px rgba(15,17,35,0.04);
+  --shadow: 0 1px 3px rgba(15,17,35,0.07), 0 1px 2px rgba(15,17,35,0.04);
+  --shadow-md: 0 4px 14px rgba(15,17,35,0.10), 0 2px 4px rgba(15,17,35,0.04);
 }
 
 html { font-size: 15px; }
