@@ -9,7 +9,6 @@ A complete interactive SEO study guide covering SEO, AEO, GEO, HEO, Technical, L
 npm install
 npx vercel
 ```
-
 Follow the prompts. Your site will be live in ~60 seconds.
 
 ### Option B — Vercel Dashboard (no CLI needed)
